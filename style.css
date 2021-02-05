@@ -1,5 +1,7 @@
 * {
-  background-color: rgb(175, 172, 172);
+  background-color: black;
+  text-align: center;
+  color: white;
 }
 /* ↓ removes disgusting selection of text ↓ */
 body {
