@@ -10,6 +10,8 @@ const secondHogBtn = document.querySelector("#second-hog-btn");
 let packagesDelivered = 0;
 let packagesIncrement = 0;
 let firstHogsIncrement = 0;
+let firstHogsPrice = 10;
+let secondHogsPrice = 125;
 // Functions
 const autoPackageDeliver = () => {
   packagesDelivered += packagesIncrement;
@@ -19,6 +21,8 @@ const updateUI = () => {
   packagesDeliveredP.innerHTML = `Packages delivered: ${packagesDelivered}`;
   firstHogsBoughtP.innerHTML = `First Hogs Bought: ${packagesIncrement}`;
   secondHogsBoughtP.innerHTML = `Second Hogs Bought: ${firstHogsIncrement}`;
+  firstHogBtn.innerHTML = `First Hog: ${firstHogsPrice}`;
+  secondHogBtn.innerHTML = `Second Hog: ${secondHogsPrice}`;
 };
 // Event listener
 packagesDeliveredBtn.addEventListener("click", () => {
@@ -26,14 +30,17 @@ packagesDeliveredBtn.addEventListener("click", () => {
 });
 
 firstHogBtn.addEventListener("click", () => {
-  if (packagesDelivered >= 10) {
-    packagesDelivered -= 10;
+  if (packagesDelivered >= firstHogsPrice) {
+    packagesDelivered -= firstHogsPrice;
+    firstHogsPrice = Math.round(firstHogsPrice * 1.15);
     packagesIncrement += 1;
   }
+  x;
 });
 secondHogBtn.addEventListener("click", () => {
-  if (packagesDelivered >= 1000) {
-    packagesDelivered -= 1000;
+  if (packagesDelivered >= secondHogsPrice) {
+    packagesDelivered -= secondHogsPrice;
+    secondHogsPrice = Math.round(secondHogsPrice * 1.3);
     firstHogsIncrement += 1;
   }
 });
@@ -41,7 +48,6 @@ secondHogBtn.addEventListener("click", () => {
 // Game Loop
 window.setInterval(() => {
   autoPackageDeliver();
-  updateUI();
 }, 1000);
 
 window.setInterval(() => {
