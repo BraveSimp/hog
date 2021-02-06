@@ -25,4 +25,5 @@ font-size: 14.20px;
 }
 #hog-buttons {
   max-width: 80ch
+  text-align: center;
 }
