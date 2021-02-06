@@ -1,7 +1,8 @@
 * {
-  background-color: black;
+  background-color: #111;
   text-align: center;
-  color: white;
+  color: #eee;
+  font-family: sans-serif;
 }
 /* ↓ removes disgusting selection of text ↓ */
 body {
@@ -9,4 +10,12 @@ body {
   -moz-user-select: -moz-none;
   -ms-user-select: none;
   user-select: none;
+}
+
+button {
+  /* we add social distancing to the buttons */
+  margin-right: 4px;
+  margin-bottom: 4px;
+  /* we make the border of the buttons hot */
+  border: solid 1.5px #ddd;
 }
