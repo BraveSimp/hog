@@ -9,60 +9,68 @@ let packagesDelivered = 0;
 let packagesIncrement = 0;
 let firstHogsIncrement = 0;
 
+const hogTypes = [];
+
 class HogType {
   /**
    * A type of a hog, which produces the previous generation of the hog.
    * @param {string} name Name of the hog
    * @param {number} cost The cost of the hog
    */
-  constructor(name, cost) {
+  constructor(name) {
+    this.id = hogTypes.length;
     // Initialize some stuff
     this.name = name;
-    this.cost = cost;
+    this.cost = 15 * 10 ** this.id;
     this.amount = 0;
     // Append self to body
-    this.buyButton;
+    this.buyButton = document.createElement("button");
+    this.buyButton.classList.add("hog-button");
+    this.buyButton.addEventListener("click", () => this.buy());
+    hogButtons.appendChild(this.buyButton);
+    this.hogCounter = document.createElement("p");
+    this.hogCounter.classList.add("hog-counter");
+    hogCounters.appendChild(this.hogCounter);
+    hogTypes.push(this);
+  }
+  updateUI() {
+    this.buyButton.innerText = `${this.name}: ${this.cost}`;
+    this.hogCounter.innerText = `${this.name}s bought: ${this.amount}`;
   }
   buy() {
     if (packagesDelivered < this.cost) return;
     packagesDelivered -= this.cost;
     this.amount++;
-    this.cost *= 1.15;
+    this.cost = Math.round(this.cost * 1.15);
+  }
+  applyGains() {
+    if (this.id === 0) packagesDelivered += this.amount;
+    else hogTypes[this.id - 1].amount += this.amount;
   }
 }
 
 // Functions
 const autoPackageDeliver = () => {
-  packagesDelivered += packagesIncrement;
-  packagesIncrement += firstHogsIncrement;
+  for (const hogType of hogTypes) hogType.applyGains();
 };
 const updateUI = () => {
   packagesDeliveredP.innerHTML = `Packages delivered: ${packagesDelivered}`;
-  firstHogsBoughtP.innerHTML = `First Hogs Bought: ${packagesIncrement}`;
-  secondHogsBoughtP.innerHTML = `Second Hogs Bought: ${firstHogsIncrement}`;
-  firstHogBtn.innerHTML = `First Hog: ${firstHogsPrice}`;
-  secondHogBtn.innerHTML = `Second Hog: ${secondHogsPrice}`;
+  for (const hogType of hogTypes) hogType.updateUI();
 };
 // Event listener
 packagesDeliveredBtn.addEventListener("click", () => {
   packagesDelivered += 1;
 });
 
-firstHogBtn.addEventListener("click", () => {
-  if (packagesDelivered >= firstHogsPrice) {
-    packagesDelivered -= firstHogsPrice;
-    firstHogsPrice = Math.round(firstHogsPrice * 1.15);
-    packagesIncrement += 1;
-  }
-  x;
-});
-secondHogBtn.addEventListener("click", () => {
-  if (packagesDelivered >= secondHogsPrice) {
-    packagesDelivered -= secondHogsPrice;
-    secondHogsPrice = Math.round(secondHogsPrice * 1.3);
-    firstHogsIncrement += 1;
-  }
-});
+new HogType("First Hog");
+new HogType("Second Hog");
+new HogType("Third Hog");
+new HogType("Fourth Hog");
+new HogType("Fifth Hog");
+new HogType("Sixth Hog");
+new HogType("Seventh Hog");
+new HogType("Eighth Hog");
+new HogType("1 H0G 2 rul dem aLLL!!!!!!");
 
 // Game Loop
 window.setInterval(() => {
