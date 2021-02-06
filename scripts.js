@@ -2,16 +2,35 @@
 //  DocumentObjectModel Variables ( connection variables)
 const packagesDeliveredP = document.querySelector("#packages-delivered-p");
 const packagesDeliveredBtn = document.querySelector("#packages-delivered-btn");
-const firstHogsBoughtP = document.querySelector("#first-hogs-bought-p");
-const firstHogBtn = document.querySelector("#first-hog-btn");
-const secondHogsBoughtP = document.querySelector("#second-hogs-bought-p");
-const secondHogBtn = document.querySelector("#second-hog-btn");
+const hogCounters = document.querySelector("#hog-counters"); //hog-buttons
+const hogButtons = document.querySelector("#hog-buttons");
 // ↓ Game Variables ( variables used in the game duh) ↓
 let packagesDelivered = 0;
 let packagesIncrement = 0;
 let firstHogsIncrement = 0;
-let firstHogsPrice = 10;
-let secondHogsPrice = 125;
+
+class HogType {
+  /**
+   * A type of a hog, which produces the previous generation of the hog.
+   * @param {string} name Name of the hog
+   * @param {number} cost The cost of the hog
+   */
+  constructor(name, cost) {
+    // Initialize some stuff
+    this.name = name;
+    this.cost = cost;
+    this.amount = 0;
+    // Append self to body
+    this.buyButton;
+  }
+  buy() {
+    if (packagesDelivered < this.cost) return;
+    packagesDelivered -= this.cost;
+    this.amount++;
+    this.cost *= 1.15;
+  }
+}
+
 // Functions
 const autoPackageDeliver = () => {
   packagesDelivered += packagesIncrement;
