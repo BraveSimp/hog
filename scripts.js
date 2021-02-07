@@ -21,7 +21,7 @@ class HogType {
     this.id = hogTypes.length;
     // Initialize some stuff
     this.name = name;
-    this.cost = 15 * 10 ** this.id;
+    this.cost = 5 * 25 ** this.id;
     this.amount = 0;
     // Append self to body
     this.buyButton = document.createElement("button");
