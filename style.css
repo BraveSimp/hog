@@ -17,13 +17,18 @@ button {
   margin-right: 4px;
   margin-bottom: 4px;
   /* we make the border of the buttons hot */
-  border: solid 1.5px #ddd;
+  border: 1.5px solid white;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+button:hover {
+  background: white;
+  color: black; 
 }
 #hog-counters {
 font-size: 14.20px;
 }
 #hog-buttons {
   max-width: 80ch
-  margin: auto 0;
+  margin; auto 0;
 }
