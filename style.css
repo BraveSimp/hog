@@ -23,12 +23,11 @@ button {
 }
 button:hover {
   background: white;
-  color: black; 
+  color: black;
 }
 #hog-counters {
-font-size: 14.20px;
+  font-size: 14.2px;
 }
 #hog-buttons {
-  max-width: 80ch
-  margin; auto 0;
+  margin: 0 auto;
 }
