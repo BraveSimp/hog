@@ -4,11 +4,31 @@ const packagesDeliveredP = document.querySelector("#packages-delivered-p");
 const packagesDeliveredBtn = document.querySelector("#packages-delivered-btn");
 const hogCounters = document.querySelector("#hog-counters"); //hog-buttons
 const hogButtons = document.querySelector("#hog-buttons");
+
 // ↓ Game Variables ( variables used in the game duh) ↓
 let packagesDelivered = 0;
-let packagesIncrement = 0;
-let firstHogsIncrement = 0;
 
+const saveGame = () => {
+  const gameSave = {
+    packagesDelivered,
+    hogTypes: hogTypes.map((hog) => ({ amount: hog.amount })),
+  };
+  localStorage.setItem("Hogs of Gods", btoa(JSON.stringify(gameSave)));
+};
+function loadSave() {
+  var saveData = localStorage.getItem("Hogs of Gods");
+  // Implementation when
+  //printMessageLine("Loaded.");
+  console.log(saveData);
+  if (!saveData) return;
+  console.log(saveData);
+
+  const gameSave = JSON.parse(atob(localStorage["Hogs of Gods"]));
+  packagesDelivered = gameSave.packagesDelivered;
+  for (const hogId in gameSave.hogTypes)
+    hogTypes[hogId].amount = gameSave.hogTypes[hogId].amount;
+}
+// hog type OOP shit
 const hogTypes = [];
 
 class HogType {
@@ -80,3 +100,4 @@ window.setInterval(() => {
 window.setInterval(() => {
   updateUI();
 }, 20);
+loadSave();
