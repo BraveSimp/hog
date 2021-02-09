@@ -96,6 +96,9 @@ new HogType("1 H0G 2 rul dem aLLL!!!!!!");
 window.setInterval(() => {
   autoPackageDeliver();
 }, 1000);
+window.setInterval(() => {
+  saveGame();
+}, 30000);
 
 window.setInterval(() => {
   updateUI();
